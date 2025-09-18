@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Tarea S2</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: Arial, sans-serif; background:#0f1724; color:#e6eef8; margin:20px; }
+    h1 { color:#7dd3fc; }
+    section { margin-bottom:24px; padding:12px; border-radius:8px; background:#071025; box-shadow:0 4px 12px rgba(0,0,0,0.6); }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:8px; }
+    button {
+      background:#1e293b; color:#e6eef8; border:1px solid #334155; padding:10px;
+      border-radius:6px; cursor:pointer; font-size:14px;
+    }
+    button:hover { transform:translateY(-2px); box-shadow:0 6px 18px rgba(0,0,0,0.6); }
+    .small { font-size:13px; color:#9fb4c8; margin-top:8px; }
+    footer { margin-top:20px; color:#8aa1b8; font-size:13px; }
+    .block-title { color:#93c5fd; margin-bottom:8px; }
+  </style>
+</head>
+<body>
+  <h1>TAREA: Ejercicios Bloques A, B y C</h1>
+  <p class="small">Haz clic en el ejercicio que quieras ejecutar. Cada botón abre <code>prompt</code> y muestra resultados con <code>alert</code> (estilo principiante).</p>
+
+
+  <section>
+    <div class="block-title"><strong>Bloque A — Condicionales </strong></div>
+    <div class="grid">
+      <button onclick="positivoNegativo()">Positivo o negativo</button>
+      <button onclick="costoLapices()">Costo lápices</button>
+      <button onclick="descuentoTraje()">Descuento trajes</button>
+      <button onclick="costoViaje()">Costo viaje autobús</button>
+      <button onclick="costoCitas()">Consultorio citas</button>
+      <button onclick="precioCometa()">Fábrica El Cometa</button>
+      <button onclick="aumentoCredito()">Banco XYZ</button>
+      <button onclick="envioPaquete()">Paquetería</button>
+      <button onclick="clasificarEdad()">Clasificación edades</button>
+      <button onclick="diaSemana()">Día de la semana</button>
+    </div>
+  </section>
+
+  
+  <section>
+    <div class="block-title"><strong>Bloque B — Ciclos (N casos) (1 a 10)</strong></div>
+    <div class="grid">
+      <button onclick="nPositivosNegativos()">N positivo/negativo</button>
+      <button onclick="nLapices()">N compras lápices</button>
+      <button onclick="nTrajes()">N compras trajes</button>
+      <button onclick="nViajes()">N viajes autobús</button>
+      <button onclick="nConsultorio()">N pacientes consultorio</button>
+      <button onclick="nCometa()">N artículos El Cometa</button>
+      <button onclick="nBanco()">N clientes banco</button>
+      <button onclick="nPaqueteria()">N paquetes paquetería</button>
+      <button onclick="nEdades()">N personas edades</button>
+      <button onclick="nDiasSemana()">N números → días</button>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="block-title"><strong>Bloque C — Arreglos (1 a 10)</strong></div>
+    <div class="grid">
+      <button onclick="arregloPositivosNegativos()">Arreglo: positivos/negativos</button>
+      <button onclick="arregloLapices()">Arreglo: pedidos lápices</button>
+      <button onclick="arregloTrajes()">Arreglo: precios trajes</button>
+      <button onclick="arregloViajes()">Arreglo: viajes</button>
+      <button onclick="arregloCitas()">Arreglo: citas médicas</button>
+      <button onclick="arregloCometa()">Arreglo: El Cometa</button>
+      <button onclick="arregloBanco()">Arreglo: banco</button>
+      <button onclick="arregloPaqueteria()">Arreglo: paquetería</button>
+      <button onclick="arregloEdades()">Arreglo: edades</button>
+      <button onclick="arregloDias()">Arreglo: días</button>
+    </div>
+  </section>
+
+
+<script>
+// BLOQUE A //
+
+
+function positivoNegativo(){
+  let numero = parseFloat(prompt("Ingrese un número:"));
+  if (isNaN(numero)) { alert("Entrada no válida"); return; }
+  if (numero > 0) alert("El número " + numero + " es positivo.");
+  else if (numero < 0) alert("El número " + numero + " es negativo.");
+  else alert("El número es 0, es neutro.");
+}
+
+
+function costoLapices(){
+  let cantidad = parseInt(prompt("¿Cuántos lápices compra?"));
+  if (isNaN(cantidad)) { alert("Entrada no válida"); return; }
+  let precio = (cantidad >= 1000) ? 0.85 : 0.90;
+  let total = cantidad * precio;
+  alert("Total a pagar: $" + total.toFixed(2));
+}
+
+
+function descuentoTraje(){
+  let precio = parseFloat(prompt("Ingrese el precio del traje:"));
+  if (isNaN(precio)) { alert("Entrada no válida"); return; }
+  let descuento = (precio > 2500) ? 0.15 : 0.08;
+  let final = precio - (precio * descuento);
+  alert("Precio final: $" + final.toFixed(2));
+}
+
+
+function costoViaje(){
+  let tipo = prompt("Tipo de autobús (A, B o C):");
+  let km = parseFloat(prompt("Distancia en km:"));
+  let personas = parseInt(prompt("Cantidad de personas:"));
+  if (!tipo || isNaN(km) || isNaN(personas)) { alert("Entrada no válida"); return; }
+  if (personas < 20) personas = 20;
+  let tarifa = 0;
+  if (tipo.toUpperCase() === "A") tarifa = 2.0;
+  else if (tipo.toUpperCase() === "B") tarifa = 2.5;
+  else if (tipo.toUpperCase() === "C") tarifa = 3.0;
+  else { alert("Tipo de autobús no válido"); return; }
+  let total = km * personas * tarifa;
+  let porPersona = total / personas;
+  alert("Costo total: $" + total.toFixed(2) + " – Costo por persona: $" + porPersona.toFixed(2));
+}
+
+
+function costoCitas(){
+  let cita = parseInt(prompt("Número de cita:"));
+  if (isNaN(cita) || cita < 1) { alert("Entrada no válida"); return; }
+  let costo = 0;
+  if (cita >= 1 && cita <= 3) costo = 200;
+  else if (cita <= 5) costo = 150;
+  else if (cita <= 8) costo = 100;
+  else costo = 50;
+  let acumulado = 0;
+  for (let i = 1; i <= cita; i++){
+    if (i <= 3) acumulado += 200;
+    else if (i <= 5) acumulado += 150;
+    else if (i <= 8) acumulado += 100;
+    else acumulado += 50;
+  }
+  alert("Costo cita " + cita + ": $" + costo + " – Acumulado: $" + acumulado);
+}
+
+
+function precioCometa(){
+  let clave = parseInt(prompt("Clave (1–6):"));
+  let mp = parseFloat(prompt("Costo materia prima:"));
+  if (isNaN(clave) || isNaN(mp)) { alert("Entrada no válida"); return; }
+  let mano = 0, gastos = 0;
+  if (clave === 1 || clave === 2) mano = mp * 0.80;
+  else if (clave === 3 || clave === 4) mano = mp * 0.75;
+  else if (clave === 5 || clave === 6) mano = mp * 0.85;
+  else { alert("Clave inválida"); return; }
+  if (clave === 2 || clave === 4 || clave === 5) gastos = mp * 0.30;
+  else gastos = mp * 0.35;
+  let produccion = mp + mano + gastos;
+  let venta = produccion + (produccion * 0.45);
+  alert("Costo producción: $" + produccion.toFixed(2) + " – Precio de venta: $" + venta.toFixed(2));
+}
+
+
+function aumentoCredito(){
+  let tipo = parseInt(prompt("Tipo de tarjeta (1,2,3 u otro):"));
+  let credito = parseFloat(prompt("Crédito actual:"));
+  if (isNaN(tipo) || isNaN(credito)) { alert("Entrada no válida"); return; }
+  let aumento = 0;
+  if (tipo === 1) aumento = 0.25;
+  else if (tipo === 2) aumento = 0.35;
+  else if (tipo === 3) aumento = 0.40;
+  else aumento = 0.50;
+  let nuevo = credito + (credito * aumento);
+  alert("Nuevo crédito: $" + nuevo.toFixed(2));
+}
+
+
+function envioPaquete(){
+  let peso = parseFloat(prompt("Peso del paquete (kg):"));
+  if (isNaN(peso)) { alert("Entrada no válida"); return; }
+  if (peso > 5) { alert("Error: El paquete no puede pesar más de 5 kg"); return; }
+  let zona = prompt("Zona (1=América N, 2=América C, 3=América S, 4=Europa, 5=Asia):");
+  let tarifa = 0;
+  if (zona === "1") tarifa = 11;
+  else if (zona === "2") tarifa = 10;
+  else if (zona === "3") tarifa = 12;
+  else if (zona === "4") tarifa = 24;
+  else if (zona === "5") tarifa = 27;
+  else { alert("Zona inválida"); return; }
+  let costo = peso * tarifa;
+  alert("Costo envío: $" + costo.toFixed(2));
+}
+
+
+function clasificarEdad(){
+  let edad = parseInt(prompt("Ingrese la edad:"));
+  if (isNaN(edad) || edad < 0) { alert("Entrada no válida"); return; }
+  let cat = "";
+  if (edad >= 1 && edad <= 3) cat = "Infante";
+  else if (edad <= 13) cat = "Niño";
+  else if (edad <= 17) cat = "Adolescente";
+  else if (edad <= 35) cat = "Joven";
+  else if (edad <= 64) cat = "Adulto";
+  else cat = "Adulto mayor";
+  alert("Categoría: " + cat);
+}
+
+
+function diaSemana(){
+  let num = parseInt(prompt("Número del 1 al 7:"));
+  if (isNaN(num)) { alert("Entrada no válida"); return; }
+  let dia = "";
+  if (num === 1) dia = "Lunes";
+  else if (num === 2) dia = "Martes";
+  else if (num === 3) dia = "Miércoles";
+  else if (num === 4) dia = "Jueves";
+  else if (num === 5) dia = "Viernes";
+  else if (num === 6) dia = "Sábado";
+  else if (num === 7) dia = "Domingo";
+  else dia = "Error: número fuera de rango";
+  alert(dia);
+}
+
+//  BLOQUE B  //
+
+
+function nPositivosNegativos(){
+  let n = parseInt(prompt("¿Cuántos números vas a ingresar?"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  for (let i = 1; i <= n; i++){
+    let num = parseFloat(prompt("Número " + i + ":"));
+    if (isNaN(num)) { alert("Entrada no válida para el número " + i); continue; }
+    if (num > 0) alert(num + " es positivo");
+    else if (num < 0) alert(num + " es negativo");
+    else alert(num + " es neutro");
+  }
+}
+
+
+function nLapices(){
+  let n = parseInt(prompt("Cantidad de pedidos:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  for (let i = 1; i <= n; i++){
+    let cantidad = parseInt(prompt("Pedido " + i + " - cantidad de lápices:"));
+    if (isNaN(cantidad)) { alert("Entrada no válida en pedido " + i); continue; }
+    let precio = (cantidad >= 1000) ? 0.85 : 0.90;
+    let total = cantidad * precio;
+    alert("Pedido " + i + ": $" + total.toFixed(2));
+  }
+}
+
+
+function nTrajes(){
+  let n = parseInt(prompt("Cantidad de trajes:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  for (let i = 1; i <= n; i++){
+    let precio = parseFloat(prompt("Precio del traje " + i + ":"));
+    if (isNaN(precio)) { alert("Entrada no válida en traje " + i); continue; }
+    let desc = (precio > 2500) ? 0.15 : 0.08;
+    let final = precio - (precio * desc);
+    alert("Traje " + i + ": $" + final.toFixed(2));
+  }
+}
+
+
+function nViajes(){
+  let n = parseInt(prompt("Cantidad de viajes:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  for (let i = 1; i <= n; i++){
+    let tipo = prompt("Viaje " + i + " - Tipo de autobús (A,B,C):");
+    let km = parseFloat(prompt("Distancia (km):"));
+    let personas = parseInt(prompt("Personas:"));
+    if (!tipo || isNaN(km) || isNaN(personas)) { alert("Entrada no válida en viaje " + i); continue; }
+    if (personas < 20) personas = 20;
+    let tarifa = 0;
+    if (tipo.toUpperCase() === "A") tarifa = 2.0;
+    else if (tipo.toUpperCase() === "B") tarifa = 2.5;
+    else if (tipo.toUpperCase() === "C") tarifa = 3.0;
+    else { alert("Tipo inválido en viaje " + i); continue; }
+    let total = km * personas * tarifa;
+    let porPersona = total / personas;
+    alert("Viaje " + i + ": Costo total $" + total.toFixed(2) + " – Costo por persona $" + porPersona.toFixed(2));
+  }
+}
+
+
+function nConsultorio(){
+  let n = parseInt(prompt("Número de pacientes:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  let acumulado = 0;
+  for (let i = 1; i <= n; i++){
+    let cita = parseInt(prompt("Número de cita del paciente " + i + ":"));
+    if (isNaN(cita) || cita < 1) { alert("Entrada no válida para paciente " + i); continue; }
+    let costo = 0;
+    if (cita <= 3) costo = 200;
+    else if (cita <= 5) costo = 150;
+    else if (cita <= 8) costo = 100;
+    else costo = 50;
+    acumulado += costo;
+    alert("Cita " + cita + ": $" + costo + " – Acumulado: $" + acumulado);
+  }
+}
+
+
+function nCometa(){
+  let n = parseInt(prompt("Número de artículos:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  for (let i = 1; i <= n; i++){
+    let clave = parseInt(prompt("Artículo " + i + " - Clave (1–6):"));
+    let mp = parseFloat(prompt("Materia prima:"));
+    if (isNaN(clave) || isNaN(mp)) { alert("Entrada no válida en artículo " + i); continue; }
+    let mano = 0, gastos = 0;
+    if (clave === 1 || clave === 2) mano = mp * 0.80;
+    else if (clave === 3 || clave === 4) mano = mp * 0.75;
+    else if (clave === 5 || clave === 6) mano = mp * 0.85;
+    else { alert("Clave inválida para artículo " + i); continue; }
+    if (clave === 2 || clave === 4 || clave === 5) gastos = mp * 0.30;
+    else gastos = mp * 0.35;
+    let prod = mp + mano + gastos;
+    let venta = prod + (prod * 0.45);
+    alert("Artículo " + i + ": Precio venta $" + venta.toFixed(2));
+  }
+}
+
+
+function nBanco(){
+  let n = parseInt(prompt("Número de clientes:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  for (let i = 1; i <= n; i++){
+    let tipo = parseInt(prompt("Cliente " + i + " - Tipo tarjeta (1,2,3 u otro):"));
+    let credito = parseFloat(prompt("Crédito actual:"));
+    if (isNaN(tipo) || isNaN(credito)) { alert("Entrada no válida en cliente " + i); continue; }
+    let aumento = 0;
+    if (tipo === 1) aumento = 0.25;
+    else if (tipo === 2) aumento = 0.35;
+    else if (tipo === 3) aumento = 0.40;
+    else aumento = 0.50;
+    let nuevo = credito + (credito * aumento);
+    alert("Cliente " + i + ": Nuevo crédito $" + nuevo.toFixed(2));
+  }
+}
+
+
+function nPaqueteria(){
+  let n = parseInt(prompt("Número de paquetes:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  for (let i = 1; i <= n; i++){
+    let peso = parseFloat(prompt("Paquete " + i + " - Peso (kg):"));
+    if (isNaN(peso)) { alert("Entrada no válida en paquete " + i); continue; }
+    if (peso > 5) { alert("Paquete " + i + ": Error, excede 5 kg"); continue; }
+    let zona = prompt("Zona (1=América N, 2=América C, 3=América S, 4=Europa, 5=Asia):");
+    let tarifa = 0;
+    if (zona === "1") tarifa = 11;
+    else if (zona === "2") tarifa = 10;
+    else if (zona === "3") tarifa = 12;
+    else if (zona === "4") tarifa = 24;
+    else if (zona === "5") tarifa = 27;
+    else { alert("Zona inválida en paquete " + i); continue; }
+    let costo = peso * tarifa;
+    alert("Paquete " + i + ": Costo envío $" + costo.toFixed(2));
+  }
+}
+
+
+function nEdades(){
+  let n = parseInt(prompt("Número de personas:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  for (let i = 1; i <= n; i++){
+    let edad = parseInt(prompt("Edad de la persona " + i + ":"));
+    if (isNaN(edad)) { alert("Entrada no válida para persona " + i); continue; }
+    let cat = "";
+    if (edad >= 1 && edad <= 3) cat = "Infante";
+    else if (edad <= 13) cat = "Niño";
+    else if (edad <= 17) cat = "Adolescente";
+    else if (edad <= 35) cat = "Joven";
+    else if (edad <= 64) cat = "Adulto";
+    else cat = "Adulto mayor";
+    alert("Persona " + i + ": " + cat);
+  }
+}
+
+
+function nDiasSemana(){
+  let n = parseInt(prompt("Cantidad de números:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  for (let i = 1; i <= n; i++){
+    let num = parseInt(prompt("Número " + i + " (1-7):"));
+    if (isNaN(num)) { alert("Entrada no válida en número " + i); continue; }
+    let dia = "";
+    if (num === 1) dia = "Lunes";
+    else if (num === 2) dia = "Martes";
+    else if (num === 3) dia = "Miércoles";
+    else if (num === 4) dia = "Jueves";
+    else if (num === 5) dia = "Viernes";
+    else if (num === 6) dia = "Sábado";
+    else if (num === 7) dia = "Domingo";
+    else dia = "Error";
+    alert("Número " + i + ": " + dia);
+  }
+}
+
+// BLOQUE C //
+
+
+function arregloPositivosNegativos(){
+  let n = parseInt(prompt("Cantidad de números:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  let numeros = [];
+  for (let i = 0; i < n; i++){
+    numeros.push(parseFloat(prompt("Número " + (i+1) + ":")));
+  }
+  for (let i = 0; i < numeros.length; i++){
+    let num = numeros[i];
+    if (isNaN(num)) alert("Número " + (i+1) + " no válido");
+    else if (num > 0) alert(num + " es positivo");
+    else if (num < 0) alert(num + " es negativo");
+    else alert(num + " es neutro");
+  }
+}
+
+
+function arregloLapices(){
+  let n = parseInt(prompt("Número de pedidos:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  let pedidos = [];
+  for (let i = 0; i < n; i++){
+    pedidos.push(parseInt(prompt("Pedido " + (i+1) + " - cantidad de lápices:")));
+  }
+  for (let i = 0; i < pedidos.length; i++){
+    let cant = pedidos[i];
+    if (isNaN(cant)) { alert("Pedido " + (i+1) + " inválido"); continue; }
+    let precio = (cant >= 1000) ? 0.85 : 0.90;
+    alert("Pedido " + (i+1) + ": $" + (cant * precio).toFixed(2));
+  }
+}
+
+
+function arregloTrajes(){
+  let n = parseInt(prompt("Número de trajes:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  let precios = [];
+  for (let i = 0; i < n; i++){
+    precios.push(parseFloat(prompt("Precio del traje " + (i+1) + ":")));
+  }
+  for (let i = 0; i < precios.length; i++){
+    let p = precios[i];
+    if (isNaN(p)) { alert("Traje " + (i+1) + " inválido"); continue; }
+    let desc = (p > 2500) ? 0.15 : 0.08;
+    alert("Traje " + (i+1) + ": $" + (p - p*desc).toFixed(2));
+  }
+}
+
+
+function arregloViajes(){
+  let n = parseInt(prompt("Número de viajes:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  let viajes = [];
+  for (let i = 0; i < n; i++){
+    let tipo = prompt("Viaje " + (i+1) + " - Tipo (A,B,C):");
+    let km = parseFloat(prompt("Distancia (km):"));
+    let per = parseInt(prompt("Personas:"));
+    viajes.push([tipo, km, per]);
+  }
+  for (let i = 0; i < viajes.length; i++){
+    let tipo = viajes[i][0], km = viajes[i][1], per = viajes[i][2];
+    if (isNaN(km) || isNaN(per) || !tipo) { alert("Viaje " + (i+1) + " datos inválidos"); continue; }
+    if (per < 20) per = 20;
+    let tarifa = 0;
+    if (tipo.toUpperCase() === "A") tarifa = 2.0;
+    else if (tipo.toUpperCase() === "B") tarifa = 2.5;
+    else if (tipo.toUpperCase() === "C") tarifa = 3.0;
+    else { alert("Viaje " + (i+1) + ": Tipo inválido"); continue; }
+    let total = km * per * tarifa;
+    alert("Viaje " + (i+1) + ": Costo total $" + total.toFixed(2) + " – Costo por persona $" + (total / per).toFixed(2));
+  }
+}
+
+
+function arregloCitas(){
+  let n = parseInt(prompt("Número de pacientes:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  let citas = [];
+  for (let i = 0; i < n; i++){
+    citas.push(parseInt(prompt("Número de cita del paciente " + (i+1) + ":")));
+  }
+  let acumulado = 0;
+  for (let i = 0; i < citas.length; i++){
+    let c = citas[i];
+    if (isNaN(c) || c < 1) { alert("Cita " + (i+1) + " inválida"); continue; }
+    let costo = 0;
+    if (c <= 3) costo = 200;
+    else if (c <= 5) costo = 150;
+    else if (c <= 8) costo = 100;
+    else costo = 50;
+    acumulado += costo;
+    alert("Cita " + c + ": $" + costo + " – Acumulado: $" + acumulado);
+  }
+}
+
+
+function arregloCometa(){
+  let n = parseInt(prompt("Número de artículos:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  let articulos = [];
+  for (let i = 0; i < n; i++){
+    let clave = parseInt(prompt("Artículo " + (i+1) + " - Clave (1–6):"));
+    let mp = parseFloat(prompt("Materia prima:"));
+    articulos.push([clave, mp]);
+  }
+  for (let i = 0; i < articulos.length; i++){
+    let clave = articulos[i][0], mp = articulos[i][1];
+    if (isNaN(clave) || isNaN(mp)) { alert("Artículo " + (i+1) + " inválido"); continue; }
+    let mano = 0, gastos = 0;
+    if (clave === 1 || clave === 2) mano = mp * 0.80;
+    else if (clave === 3 || clave === 4) mano = mp * 0.75;
+    else if (clave === 5 || clave === 6) mano = mp * 0.85;
+    else { alert("Artículo " + (i+1) + ": Clave inválida"); continue; }
+    if (clave === 2 || clave === 4 || clave === 5) gastos = mp * 0.30;
+    else gastos = mp * 0.35;
+    let prod = mp + mano + gastos;
+    let venta = prod + (prod * 0.45);
+    alert("Artículo " + (i+1) + ": Precio venta $" + venta.toFixed(2));
+  }
+}
+
+
+function arregloBanco(){
+  let n = parseInt(prompt("Número de clientes:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  let clientes = [];
+  for (let i = 0; i < n; i++){
+    let tipo = parseInt(prompt("Cliente " + (i+1) + " - Tipo tarjeta (1,2,3 u otro):"));
+    let credito = parseFloat(prompt("Crédito actual:"));
+    clientes.push([tipo, credito]);
+  }
+  for (let i = 0; i < clientes.length; i++){
+    let tipo = clientes[i][0], credito = clientes[i][1];
+    if (isNaN(tipo) || isNaN(credito)) { alert("Cliente " + (i+1) + " inválido"); continue; }
+    let aumento = 0;
+    if (tipo === 1) aumento = 0.25;
+    else if (tipo === 2) aumento = 0.35;
+    else if (tipo === 3) aumento = 0.40;
+    else aumento = 0.50;
+    let nuevo = credito + (credito * aumento);
+    alert("Cliente " + (i+1) + ": Nuevo crédito $" + nuevo.toFixed(2));
+  }
+}
+
+
+function C8_arregloPaqueteria(){
+  let n = parseInt(prompt("Número de paquetes:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  let paquetes = [];
+  for (let i = 0; i < n; i++){
+    let peso = parseFloat(prompt("Paquete " + (i+1) + " - Peso (kg):"));
+    let zona = prompt("Zona (1=América N, 2=América C, 3=América S, 4=Europa, 5=Asia):");
+    paquetes.push([peso, zona]);
+  }
+  for (let i = 0; i < paquetes.length; i++){
+    let peso = paquetes[i][0], zona = paquetes[i][1];
+    if (isNaN(peso)) { alert("Paquete " + (i+1) + " inválido"); continue; }
+    if (peso > 5) { alert("Paquete " + (i+1) + ": Error, excede 5 kg"); continue; }
+    let tarifa = 0;
+    if (zona === "1") tarifa = 11;
+    else if (zona === "2") tarifa = 10;
+    else if (zona === "3") tarifa = 12;
+    else if (zona === "4") tarifa = 24;
+    else if (zona === "5") tarifa = 27;
+    else { alert("Paquete " + (i+1) + ": Zona inválida"); continue; }
+    alert("Paquete " + (i+1) + ": Costo envío $" + (peso * tarifa).toFixed(2));
+  }
+}
+
+
+function arregloEdades(){
+  let n = parseInt(prompt("Número de personas:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  let edades = [];
+  for (let i = 0; i < n; i++){
+    edades.push(parseInt(prompt("Edad de la persona " + (i+1) + ":")));
+  }
+  for (let i = 0; i < edades.length; i++){
+    let e = edades[i];
+    if (isNaN(e)) { alert("Persona " + (i+1) + " inválida"); continue; }
+    let cat = "";
+    if (e >= 1 && e <= 3) cat = "Infante";
+    else if (e <= 13) cat = "Niño";
+    else if (e <= 17) cat = "Adolescente";
+    else if (e <= 35) cat = "Joven";
+    else if (e <= 64) cat = "Adulto";
+    else cat = "Adulto mayor";
+    alert("Persona " + (i+1) + ": " + cat);
+  }
+}
+
+
+function arregloDias(){
+  let n = parseInt(prompt("Cantidad de números:"));
+  if (isNaN(n) || n <= 0) { alert("Entrada no válida"); return; }
+  let numeros = [];
+  for (let i = 0; i < n; i++){
+    numeros.push(parseInt(prompt("Número " + (i+1) + " (1-7):")));
+  }
+  for (let i = 0; i < numeros.length; i++){
+    let num = numeros[i];
+    if (isNaN(num)) { alert("Número " + (i+1) + " inválido"); continue; }
+    let dia = "";
+    if (num === 1) dia = "Lunes";
+    else if (num === 2) dia = "Martes";
+    else if (num === 3) dia = "Miércoles";
+    else if (num === 4) dia = "Jueves";
+    else if (num === 5) dia = "Viernes";
+    else if (num === 6) dia = "Sábado";
+    else if (num === 7) dia = "Domingo";
+    else dia = "Error";
+    alert("Número " + (i+1) + ": " + dia);
+  }
+}
+</script>
+
+</body>
+</html>
